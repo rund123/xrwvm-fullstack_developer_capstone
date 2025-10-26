@@ -116,13 +116,12 @@ def get_dealer_reviews(request, dealer_id):
         return JsonResponse({"status":400,"message":"Bad Request"})
 
 # Create a `get_dealer_details` view to render the dealer details
+
+
 def get_dealer_details(request, dealer_id):
-    if (dealer_id):
-        endpoint = "/fetchDealers/"+str(dealer_id)
-        dealer_details = get_request(endpoint)
-        return JsonResponse({"status":200,"dealer_details":dealer_details})
-    else:
-        return JsonResponse({"status":400,"message":"Bad Request"})
+    dealer = get_request(f"/fetchDealers/{dealer_id}")  # returns a dict
+    return JsonResponse({"status": 200, "dealer": dealer})
+
 
 # Create a `add_review` view to submit a review
 def add_review(request):
